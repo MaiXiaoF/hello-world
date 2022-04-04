@@ -1,0 +1,239 @@
+三个数 排大小
+int main()
+{
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	scanf("%d %d %d", &a, &b, &c);
+
+	if(a < b)
+	{
+		int tep = a;
+		a = b;
+		b = tep; 
+		if (a < c)
+		{
+			int tep = a;
+			a = c;
+			c = tep;
+		}
+		if (b< c) 
+		{
+			int tep = c;
+			b = c; ;
+			c = tep;
+		}
+	}
+	printf("%d %d %d", a, b, c);
+	return 0;
+}
+
+1-100中3的倍数
+int main()
+{
+	int i = 0;
+	for (i = 1; i <= 100; i++)
+	{
+		if (i % 3 == 0)
+		{
+			printf("%d ", i);
+		}
+	}
+	return 0;
+}
+
+最大公约数
+int main()
+{
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	scanf("%d%d", &a, &b);
+	while (a % b)//辗转相除法  取余为0跳出循环
+	{
+		c = a % b;
+		b = c;
+		a = b;
+	}
+	printf("%d \n",b);
+	return 0;
+}
+
+求1000-2000 的闰年
+int main()
+{
+	int year = 0;
+	for (year = 1000; year <= 2000; year++)
+	{
+		//闰年判断2种规则
+		//1.能被4整除的并且不能被100整除的
+		//2.能被400整除的
+		if (year % 4 == 0 && year % 100 != 0)
+		{
+			printf("%d ", year);
+		}
+		else if (year % 400 == 0)
+		{
+			printf("%d ", year);
+		}
+	}
+	return 0;
+}
+
+求100-200 之间的素数
+#include <math.h>
+int main()
+{
+	int i = 0;
+	int count = 0;
+	//sqrt -- 开平方的数学库函数  引头文件#include <math.h>
+	for (i = 100; i <= 200; i++)
+	{
+		//素数能被1整除和自身整除 不能被其他数整除的数是素数
+		int j = 0;
+		// sqrt(i) 开平方i
+		for (j = 2; j < sqrt(i); j++)// 第二种 j <　ｉ
+		{
+			if (i % j == 0)
+			{
+				break;
+			}
+		}
+		if (j>sqrt(i)) // 第二种(j == i)
+		{
+			count++;
+			printf("%d ", i);
+		}
+	}
+	printf("\n%d ", count);
+	return 0;
+}
+
+求1-100 9有几个
+int main()
+{
+	int i = 0;
+	int count = 0;
+	for (i = 1; i <= 100; i++)
+	{
+		if (i % 10 == 9)
+		{
+			count++;
+		}
+		if (i / 10 == 9)
+		{
+			count++;
+		}
+	}
+	printf("count = %d ", count);
+	return 0;
+}
+
+求1/1-1/2+1/3-1/4...+1/100的和
+int main()
+{
+	int i = 0;
+	double sum = 0.0;
+	int flag = 1;
+	for (i = 1; i <= 100; i++)
+	{
+		sum +=flag*1.0/ i;
+		flag = -flag;
+	}
+	printf("%lf", sum);
+	return 0;
+}
+
+求10个数中的最大值
+int main()
+{
+	int arr[] = { -1,-2,-3,-4,-5,-6,-7,-8,-9,-10 };
+	int max = arr[0];
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	for (int i = 1; i < sz; i++)
+	{
+		if (arr[i] > max)
+		{
+			max = arr[i];
+		}
+	}
+	printf("%d ", max);
+	return 0;
+}
+
+9x9乘法表
+int main()
+{
+	int i = 0;//行
+	int j = 0;//列
+	for (i = 1; i <= 9; i++)
+	{
+		for (j = 1; j <= i; j++)
+		{
+			printf("%d * %d = %-2d  ",i,j,i*j);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+
+ 猜数字游戏
+ rand 函数  sranf 函数  引 头文件 #include <stdio.h>
+ time 函数 引头文件 #include <time.h>
+void gamePlay()//游戏开始
+{
+	printf("-----------------------\n");
+	printf("-- 1.play     0.exit --\n");
+	printf("-----------------------\n");
+}
+void game()//游戏内容
+{
+	1.生成一个随机数
+	int guess = 0;
+	int ret = 0; //来接收存储 随机数
+    ret =rand()%100+1;//rand 随机数为0-32767之间
+	猜数字
+	while (1)
+	{
+		printf("请输入你猜的数字\n");
+		scanf("%d", &guess);
+		if (guess>ret)
+		{
+			printf("猜大了\n");
+		}
+		else if (guess < ret)
+		{
+			printf("猜小了\n");
+		}
+		else
+		{
+			printf("恭喜你，猜对了\n");
+			break;
+		}
+	}
+	
+} 
+int main()
+{
+	int choose = 0;
+	srand((unsigned int)time(NULL));//随机数time 强制类型转换为int
+	do {
+		gamePlay();
+		printf("请选择:>");
+		scanf("%d", &choose);
+		switch (choose)
+		{
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("游戏退出\n");
+			break;
+		default:
+			printf("选择错误\n");
+			break;
+		}
+	} while (choose);
+	
+	return 0;
+}
